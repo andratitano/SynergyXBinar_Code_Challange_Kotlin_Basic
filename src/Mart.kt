@@ -127,8 +127,13 @@ class Mart: Diskon(){
             if (inputMember == i) {
                 println("Member Terdaftar")
                 memberInputItem()
+
             }
+
         }
+        println("Nama Tidak Terdaftar. Silakan Masukkan Kembali.")
+        member()
+
 
 
     }
@@ -191,9 +196,10 @@ class Mart: Diskon(){
         println("-------------------------------")
         val hitungDiskon = HitungDiskon(totalPayment)
         if (totalPayment > memberReqDiscount) {
-            println("Selamat! Karena total belanjaan ${inputMember} \nlebih besar dari Rp. ${memberReqDiscount}, \nmaka mendapatkan potongan sebesar ${memberDiscount.percent()}.")
-            println("${inputMember} Cukup Bayar Rp. ${hitungDiskon.discount(totalPayment, memberDiscount)}")
-            this.totalPaymentAfterDiscount = hitungDiskon.discount(totalPayment, memberDiscount).toInt()
+            print("Selamat! Karena total belanjaan ${inputMember} \nlebih besar dari Rp. ${memberReqDiscount}, \nmaka mendapatkan potongan sebesar ")
+            memberDiscount.percent()
+            println("\n${inputMember} Cukup Bayar Rp. ${hitungDiskon.discount(totalPayment, memberDiscount)}")
+            this.totalPaymentAfterDiscount = hitungDiskon.discount(totalPayment, memberDiscount).toDouble()
             println("-------------------------------")
         } else {
             HitungDiskon(totalPayment).discount(totalPayment)
@@ -209,7 +215,7 @@ class Mart: Diskon(){
         println("-------------------------------")
         println(" Checkout Pelanggan Member $inputMember")
         println("-------------------------------")
-        println("Total Belanja       : Rp. ${HitungDiskon(this.totalPayment).totalPaymentAfterDiscount.toInt()}")
+        println("Total Belanja       : Rp. ${totalPaymentAfterDiscount.toInt()}")
         println(" ")
         print("Input Uang Customer : Rp. ")
         customerMoney = Integer.valueOf(readLine())
@@ -218,7 +224,7 @@ class Mart: Diskon(){
             memberPayment()
         } else {
             println("-------------------------------")
-            println("Kembalian : Rp. ${(customerMoney - HitungDiskon(this.totalPayment).totalPaymentAfterDiscount).toInt()}")
+            println("Kembalian : Rp. ${(customerMoney - totalPaymentAfterDiscount).toInt()}")
             println("-------------------------------")
             println("- Terima Kasih -")
         }
@@ -284,8 +290,9 @@ class Mart: Diskon(){
         println(" Total Belanja : Rp. ${totalPayment}")
         println("-------------------------------")
         if (totalPayment > nonMemberReqDiscount) {
-            println("Selamat! Karena total belanjaan ${inputMember} \nlebih besar dari Rp. ${nonMemberReqDiscount}, \nmaka mendapatkan potongan sebesar ${nonMemberDiscount.percent()}")
-            println("Anda Cukup Bayar Rp. ${HitungDiskon(totalPayment).discount(totalPayment, nonMemberDiscount)}")
+            println("Selamat! Karena total belanjaan ${inputMember} \nlebih besar dari Rp. ${nonMemberReqDiscount}, \nmaka mendapatkan potongan sebesar")
+            memberDiscount.percent()
+            println("\nAnda Cukup Bayar Rp. ${HitungDiskon(totalPayment).discount(totalPayment, nonMemberDiscount)}")
             println("-------------------------------")
         } else {
             HitungDiskon(totalPayment).discount(totalPayment)
